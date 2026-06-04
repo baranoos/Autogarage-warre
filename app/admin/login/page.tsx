@@ -23,9 +23,27 @@ export default function AdminLoginPage() {
     if (authError) {
       setError("Ongeldig e-mailadres of wachtwoord.");
       setLoading(false);
-    } else {
-      router.push("/admin");
+      return;
     }
+
+    // Controleer of deze gebruiker admin is
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: adminRow } = await supabase
+        .from("admins")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (!adminRow) {
+        await supabase.auth.signOut();
+        setError("Dit account heeft geen beheerderstoegang.");
+        setLoading(false);
+        return;
+      }
+    }
+
+    router.push("/admin");
   }
 
   return (
@@ -43,9 +61,7 @@ export default function AdminLoginPage() {
           className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-5"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              E-mailadres
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">E-mailadres</label>
             <input
               type="email"
               required
@@ -76,7 +92,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-navy hover:bg-navy-light text-white font-semibold py-2.5 rounded transition-colors disabled:opacity-60"
+            className="w-full bg-navy hover:bg-navy-light disabled:opacity-60 text-white font-semibold py-2.5 rounded transition-colors"
           >
             {loading ? "Bezig met inloggen..." : "Inloggen"}
           </button>

@@ -14,12 +14,22 @@ function AccountContent() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) { router.replace("/account/login"); return; }
+
+      // Admin hoort niet op de klantpagina
+      const { data: adminRow } = await supabase
+        .from("admins")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (adminRow) { router.replace("/admin"); return; }
+
       setUser(user);
       setName(user.user_metadata?.full_name || "");
       setLoading(false);
@@ -28,9 +38,12 @@ function AccountContent() {
 
   async function handleSaveName(e: React.FormEvent) {
     e.preventDefault();
+    if (!name.trim()) { setNameError("Naam is verplicht."); return; }
+    if (name.trim().length < 2) { setNameError("Naam moet minimaal 2 tekens bevatten."); return; }
+    setNameError("");
     setSaving(true);
-    await supabase.auth.updateUser({ data: { full_name: name } });
-    await supabase.from("profiles").update({ full_name: name }).eq("id", user!.id);
+    await supabase.auth.updateUser({ data: { full_name: name.trim() } });
+    await supabase.from("profiles").update({ full_name: name.trim() }).eq("id", user!.id);
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
@@ -70,13 +83,20 @@ function AccountContent() {
           <h2 className="font-semibold text-gray-900 mb-4">Profielgegevens</h2>
           <form onSubmit={handleSaveName} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Naam</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Naam <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
+                required
                 value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500"
+                onChange={(e) => { setName(e.target.value); if (nameError) setNameError(""); }}
+                placeholder="Jouw volledige naam"
+                className={`w-full border rounded px-3 py-2 text-sm focus:outline-none transition-colors ${
+                  nameError ? "border-red-400 focus:border-red-500" : "border-gray-300 focus:border-orange-500"
+                }`}
               />
+              {nameError && <p className="text-red-500 text-xs mt-1">{nameError}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">E-mailadres</label>

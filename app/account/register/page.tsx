@@ -12,6 +12,7 @@ export default function RegisterPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.fullName.trim() || form.fullName.trim().length < 2) { setError("Voer een geldige naam in (minimaal 2 tekens)."); return; }
     if (form.password !== form.confirm) { setError("Wachtwoorden komen niet overeen."); return; }
     if (form.password.length < 8) { setError("Wachtwoord moet minimaal 8 tekens bevatten."); return; }
     setLoading(true);

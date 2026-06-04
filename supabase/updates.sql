@@ -70,7 +70,30 @@ CREATE POLICY "Admins kunnen productfotos beheren"
   WITH CHECK (true);
 
 -- ============================================================
--- 3. Reviews (klanten)
+-- 3. Admins tabel
+-- ============================================================
+CREATE TABLE IF NOT EXISTS admins (
+  user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE
+);
+
+ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
+
+-- Ingelogde gebruikers mogen alleen hun EIGEN admin-status opvragen
+CREATE POLICY "Gebruikers kunnen eigen admin status zien"
+  ON admins FOR SELECT
+  TO authenticated
+  USING (auth.uid() = user_id);
+
+-- ─── Na het aanmaken van de admin-gebruiker via Authentication > Users ───
+-- Zoek het UUID van de admin op en voeg hem toe:
+--
+--   SELECT id, email FROM auth.users WHERE email = 'admin@autogaragewarre.be';
+--
+--   INSERT INTO admins (user_id)
+--   SELECT id FROM auth.users WHERE email = 'admin@autogaragewarre.be';
+
+-- ============================================================
+-- 4. Reviews (klanten)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS reviews (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
