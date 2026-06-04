@@ -4,6 +4,8 @@ import Image from "next/image";
 import { getProductById, getRelatedProducts } from "@/lib/queries";
 import ProductCard from "@/components/ProductCard";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ id: string }>;
 }

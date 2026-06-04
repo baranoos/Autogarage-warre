@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getAllProducts } from "@/lib/queries";
 import ProductCard from "@/components/ProductCard";
 
+export const dynamic = "force-dynamic";
+
 const categoryBlocks = [
   {
     name: "Handgereedschap",

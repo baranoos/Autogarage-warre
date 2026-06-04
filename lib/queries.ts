@@ -58,7 +58,7 @@ export async function getAllProducts(): Promise<Product[]> {
     .from('products')
     .select('*')
     .order('name')
-  if (error) throw error
+  if (error) return []
   return (data as DbProduct[]).map(mapProduct)
 }
 
