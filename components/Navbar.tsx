@@ -72,14 +72,14 @@ export default function Navbar() {
 
   return (
     <nav className="bg-navy/95 backdrop-blur-md border-b border-white/10 sticky top-0 z-50 shadow-lg shadow-black/20">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20 gap-6">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-24 gap-6">
         <Link href="/" className="shrink-0 flex items-center">
           <Image
             src="/logo.png"
             alt="Auto Garage Tools & Equipment"
             width={240}
             height={107}
-            className="h-14 w-auto"
+            className="h-20 w-auto"
             priority
           />
         </Link>

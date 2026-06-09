@@ -246,7 +246,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="flex min-h-screen bg-surface">
+    <div className="flex h-screen overflow-hidden bg-surface">
       <AdminSidebar
         active={section}
         onNavigate={setSection}
@@ -256,7 +256,7 @@ export default function AdminDashboard() {
         onCloseMobile={() => setSidebarOpen(false)}
       />
 
-      <div className="flex flex-1 flex-col min-w-0">
+      <div className="flex flex-1 flex-col min-w-0 overflow-y-auto lg:ml-72">
         {/* Top bar */}
         <header className="sticky top-0 z-30 bg-white border-b border-gray-100 px-4 sm:px-8 py-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
