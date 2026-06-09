@@ -37,7 +37,7 @@ export const siteImages = {
   contact: `${P}/category-garage.png`,
   producten: `${P}/category-handgereedschap.png`,
   cta: `${P}/gereedschapswagen-7-laden.png`,
-  showroom: `${P}/tapas-plank.png`,
+  showroom: `${P}/category-garage.png`,
 } as const;
 
 export const galleryImages = [
@@ -47,7 +47,6 @@ export const galleryImages = [
   { src: `${P}/hydraulische-krik-3t.png`, alt: "Hydraulische krik" },
   { src: `${P}/master-mechanic-kit.png`, alt: "Master Mechanic Kit" },
   { src: `${P}/obdii-master-scanner.png`, alt: "OBDII diagnose scanner" },
-  { src: `${P}/tapas-plank.png`, alt: "Showroom & ontvangst" },
 ];
 
 export function getCategoryImage(category: string): string {
