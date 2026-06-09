@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import ShopChrome from "@/components/ShopChrome";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -24,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="nl" className={`h-full ${outfit.variable}`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col antialiased font-sans" suppressHydrationWarning>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ShopChrome>{children}</ShopChrome>
       </body>
     </html>
   );
