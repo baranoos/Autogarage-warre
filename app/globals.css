@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #001f3f;
+  --color-navy-dark: #001530;
+  --color-navy-light: #002a57;
+  --color-orange: #f97316;
+  --color-orange-dark: #ea580c;
+  --color-surface: #f8fafc;
+  --color-surface-warm: #faf9f7;
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: #f9731633;
+  color: #001f3f;
+}
+
+/* ── Reusable patterns ── */
+.pattern-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.12) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+.pattern-grid {
+  background-image:
+    linear-gradient(rgb(0 31 63 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 31 63 / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-orange-500/20 active:scale-[0.98];
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 border-2 border-white/80 text-white hover:bg-white hover:text-navy font-semibold px-6 py-3 rounded-xl transition-all duration-200 active:scale-[0.98];
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 border border-gray-200 text-gray-700 hover:border-navy hover:text-navy font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 bg-white;
+}
+
+.btn-navy {
+  @apply inline-flex items-center justify-center gap-2 bg-navy hover:bg-navy-light text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-navy/20 active:scale-[0.98];
+}
+
+/* ── Cards ── */
+.card {
+  @apply bg-white rounded-2xl border border-gray-100 shadow-sm;
+}
+
+.card-hover {
+  @apply bg-white rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-navy/5 hover:-translate-y-1;
+}
+
+/* ── Section labels ── */
+.section-eyebrow {
+  @apply text-orange-500 text-xs font-bold uppercase tracking-[0.2em] mb-2;
+}
+
+.section-title {
+  @apply text-2xl md:text-3xl font-bold text-gray-900 tracking-tight;
+}
+
+/* ── Form inputs ── */
+.input-field {
+  @apply w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-shadow;
+}
+
+/* ── Animations ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.6s ease-out 0.1s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.6s ease-out 0.2s both;
+}
+
+.animate-fade-up-delay-3 {
+  animation: fade-up 0.6s ease-out 0.3s both;
+}
