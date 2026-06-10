@@ -34,7 +34,7 @@ export default function AccountLoginPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <Image src="/logo.png" alt="Auto Garage" width={180} height={80} className="h-12 w-auto mx-auto" />
+            <Image src="/logo.png" alt="Auto Garage" width={240} height={107} className="h-20 w-auto mx-auto" />
           </Link>
           <p className="text-gray-400 text-sm mt-4">Inloggen op je account</p>
         </div>

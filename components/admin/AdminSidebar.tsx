@@ -40,20 +40,22 @@ const navItems: { id: AdminSection; label: string; description: string; icon: Re
 
 function SidebarContent({ active, onNavigate, onLogout, userEmail, onCloseMobile }: Omit<Props, "mobileOpen">) {
   return (
-    <div className="flex h-full flex-col">
-      <div className="border-b border-white/10 px-5 py-5">
+    <div className="flex h-full flex-col overflow-hidden">
+      <div className="shrink-0 border-b border-white/10 px-5 py-5">
         <div className="flex items-center gap-3">
-          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-white/10">
+          <Link href="/" className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl bg-white/10 hover:opacity-80 transition-opacity">
             <Image src="/logo.png" alt="Autogarage Warre" fill className="object-contain p-1.5" />
-          </div>
+          </Link>
           <div>
-            <p className="font-bold text-white leading-tight">Autogarage Warre</p>
+            <Link href="/" className="font-bold text-white leading-tight hover:underline">
+              Autogarage Warre
+            </Link>
             <p className="text-xs text-white/50">Beheerpaneel</p>
           </div>
         </div>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3 py-4">
+      <nav className="flex-1 min-h-0 overflow-y-auto space-y-1 px-3 py-4">
         <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-widest text-white/40">Menu</p>
         {navItems.map((item) => {
           const isActive = active === item.id;
@@ -83,7 +85,7 @@ function SidebarContent({ active, onNavigate, onLogout, userEmail, onCloseMobile
         })}
       </nav>
 
-      <div className="border-t border-white/10 p-4 space-y-2">
+      <div className="mt-auto shrink-0 border-t border-white/10 p-4 space-y-2">
         <Link
           href="/"
           target="_blank"
@@ -120,7 +122,7 @@ export default function AdminSidebar(props: Props) {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex lg:w-72 lg:shrink-0 lg:flex-col bg-navy border-r border-white/10">
+      <aside className="hidden lg:flex lg:flex-col lg:fixed lg:inset-y-0 lg:left-0 lg:w-72 bg-navy border-r border-white/10 z-10">
         <SidebarContent {...props} />
       </aside>
 

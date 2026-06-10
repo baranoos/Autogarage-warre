@@ -98,14 +98,14 @@ export default function Navbar() {
 
   return (
     <nav className="bg-navy/95 backdrop-blur-md border-b border-white/10 sticky top-0 z-50 shadow-lg shadow-black/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-20 gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-24 gap-4">
         <Link href="/" className="shrink-0 flex items-center" onClick={() => setMobileMenuOpen(false)}>
           <Image
             src="/logo.png"
             alt="Auto Garage Tools & Equipment"
             width={240}
             height={107}
-            className="h-16 w-auto sm:h-[4.5rem]"
+            className="h-16 w-auto sm:h-20"
             priority
           />
         </Link>
@@ -242,14 +242,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden fixed inset-0 top-20 z-40">
+        <div className="sm:hidden fixed inset-0 top-24 z-40">
           <button
             type="button"
             className="absolute inset-0 bg-navy/60 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
             aria-label="Menu sluiten"
           />
-          <div className="relative bg-navy border-t border-white/10 shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="relative bg-navy border-t border-white/10 shadow-2xl max-h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="px-4 py-5 space-y-1">
               <p className="px-4 pb-2 text-[10px] font-bold uppercase tracking-widest text-white/40">Navigatie</p>
               {links.map(({ href, label }) => (
